@@ -1,0 +1,29 @@
+#header{
+    width: 100%;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid black;
+}
+
+#productDescription{
+   background: lightblue;
+   /* width: 100%; */
+    height: 100vh;
+    /* position: absolute; */
+}
+
+#productVideo{
+    /* width: 100%; */
+    height: 100vh;
+    /* position: absolute; */
+    background: lightgoldenrodyellow;
+}
+
+.nav-link{
+    border: 1px solid black;
+    margin: 10vw;
+
+}
+
