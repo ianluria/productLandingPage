@@ -1,25 +1,20 @@
 
+addNavLinks(["Description", "Video", "Request"]);
 
+function addNavLinks(arrayOfTitles) {
 
-function addNavLinks(){
-    const navBar = document.getElementById("nav-bar");
-
-    navLinkArray = [];
-    for (let i = 0; i < 3; i++){
+    arrayOfTitles.forEach(title => {
         const newNavLink = document.createElement("span");
         newNavLink.classList.add("nav-link");
-        navLinkArray.push(newNavLink);
-    }
-
-    navLinkArray[0].appendChild(document.createTextNode("Description"));
-    navLinkArray[1].appendChild(document.createTextNode("Video"));
-    navLinkArray[2].appendChild(document.createTextNode("Request"));
-
-    navLinkArray.forEach(element => {
-        navBar.appendChild(element);
+        newNavLink.appendChild(document.createTextNode(title));
+        newNavLink.onclick = onClickHandler;
+        document.getElementById("header").appendChild(newNavLink);
     });
-
 }
 
-addNavLinks();
+function onClickHandler(event) {
+    document.getElementById("product" + event.target.innerText).scrollIntoView({ block: "start", behavior: "smooth" });
+}
+
+
 
