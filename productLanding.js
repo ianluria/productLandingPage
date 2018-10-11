@@ -16,5 +16,7 @@ function onClickHandler(event) {
     document.getElementById("product" + event.target.innerText).scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
+const youTubePlayer = document.getElementById("youTubePlayer");
 
+console.log(youTubePlayer);
 

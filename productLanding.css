@@ -16,16 +16,39 @@ body{
 #productDescription{
    background: lightblue;
     height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;  
+}
+
+.descriptionBlock{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-top: 5vh;
 }
 
 #cloroxFront{
-width: 50%;
-height: 50%;
+    width: auto;
+    max-height: 50vh;
+}
+
+#genericSaltBag{
+    width: auto;
+    max-height: 50vh;
 }
 
 #productVideo{
-    height: 100vh;
+    min-height: 100vh;
     background: lightgoldenrodyellow;
+    display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+#videoContainer{
+    max-width: 50vw;
 }
 
 #productRequest{
