@@ -1,3 +1,8 @@
+* {
+    box-sizing: border-box;
+}
+
+
 body{
     font-family: 'Open Sans', sans-serif;
 }
@@ -18,25 +23,27 @@ body{
     height: 100vh;
     display: flex;
     justify-content: space-around;
-    align-items: baseline;  
+    align-items: center;  
 }
 
 .descriptionBlock{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     text-align: center;
-    margin-top: 5vh;
 }
 
-#cloroxFront{
-    width: auto;
-    max-height: 50vh;
+.descriptionBlock>ul{
+    list-style-type: none;
+    padding: 0px;
 }
 
-#genericSaltBag{
-    width: auto;
-    max-height: 50vh;
+.descriptionBlock>img{
+    max-width: 15vw;
+    height: auto;
+    margin: auto;
+    margin-bottom: 5vh;
+
 }
 
 #productVideo{
@@ -47,8 +54,20 @@ body{
    align-items: center;
 }
 
-#videoContainer{
-    max-width: 50vw;
+#videoContainer>h1{
+    font-size: 1.5em;
+
+}
+
+#videoContainer>h2{
+font-size: 1.1em;
+text-align: center;
+}
+
+#playerContainer{
+    margin: auto;
+    width: 641px;
+    margin-top: 10vh;
 }
 
 #productRequest{
