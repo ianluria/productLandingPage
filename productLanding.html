@@ -11,11 +11,24 @@
 
 <body>
 
-    <header id="header">
-        <!-- <div id="nav-bar"></div> -->
-    </header>
+    <!-- <header id="header"> </header> -->
 
-    <div id="productDescription">
+    <div id="productWelcome" class="panel">
+        <h1 class="welcomeText">Ogden Salt Company</h1>
+        <h2 class="welcomeText">Since 1921, purveyors of pure, fine grain, Sodium Chloride, sourced from the Great Salt
+            Lake</h2>
+        <div id="welcomeLinks">
+            <span class="welcomeLink descriptionLink">Products</span>
+            <span class="welcomeLink videoLink">Video</span>
+            <span class="welcomeLink requestLink">Request Information</span>
+        </div>
+    </div>
+    <header id="header">
+        <span class="nav-link descriptionLink">Description</span>
+        <span class="nav-link videoLink">Video</span>
+        <span class="nav-link requestLink">Request</span>
+    </header>
+    <div id="productDescription" class="panel">
         <span id="descriptionBlock1" class="descriptionBlock">
             <img src="saltFront.png" alt="Clorox Pool Salt" id="cloroxFront">
             <p>Clorox&reg; Pool Salt</p>
@@ -35,7 +48,7 @@
             </ul>
         </span>
     </div>
-    <div id="productVideo">
+    <div id="productVideo" class="panel">
         <div id="videoContainer">
             <h1>Our source, the Great Salt Lake (North Arm), has an average salinity of 24%.</h1>
             <h2>At approximately 7 times more salty than the ocean, our source is abundant and easy to harvest.</h2>
@@ -44,8 +57,20 @@
             </div>
         </div>
     </div>
-    <div id="productRequest">
+    <div id="productRequest" class="panel">
+        <h1>Request More Information</h1>
 
+        <form id="form" action="https://www.freecodecamp.com/email-submit" method="post">
+            <label for="commentsInput">Optional Questions and Comments</label>
+            <br>
+            <textarea name="comments" id="commentsInput" rows="5" cols="50" placeholder="Optional" class="userInput"></textarea>
+            <br>
+            <label for="emailInput">Email Address</label>
+            <br>
+            <input type="email" name="email" id="emailInput" class="userInput" required>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
     </div>
 
 </body>

@@ -7,20 +7,47 @@ body{
     font-family: 'Open Sans', sans-serif;
 }
 
+.panel{
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
 #header{
-    width: 100%;
+    min-width: 100vw;
     min-height: 7vh;
     position: sticky;
     top: 0;
     display: flex;
     justify-content: space-around;
-    align-items: center;  
+    align-items: center;
+    background: #f2f2f2;  
     /* border: 1px solid black; */
+}
+
+#productWelcome{
+    background: url(oldsaltplant.jpg) no-repeat center local;
+    background-size: cover;
+}
+
+#welcomeLinks{
+    background: #ffffff;
+    max-width: 50vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+    /* height: 10vh; */
+    padding: 1.5%;
+    position: relative;
+    top: 10vh;
+}
+
+.welcomeLink{
+    font-size: 1.4em;
 }
 
 #productDescription{
    background: lightblue;
-    height: 100vh;
     display: flex;
     justify-content: space-around;
     align-items: center;  
@@ -47,7 +74,6 @@ body{
 }
 
 #productVideo{
-    min-height: 100vh;
     background: lightgoldenrodyellow;
     display: flex;
    justify-content: center;
@@ -71,8 +97,30 @@ text-align: center;
 }
 
 #productRequest{
-    height: 100vh;
     background: lightsalmon;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#productRequest>h1{
+    margin-bottom: 5vh;
+}
+
+#productRequest label{
+    font-size: 1.4em;
+}
+
+#productRequest input[type="submit"]{
+    font-size: 1.4em;
+    float: right;
+}
+
+.userInput{
+    margin-top: 1vh;
+    margin-bottom: 2vh;
+    font-size: 1.4em;
 }
 
 .nav-link{
@@ -84,6 +132,7 @@ text-align: center;
     text-align: center;
     transition: font-size 0.05s ease-out;
 }
+
 
 .nav-link:hover{
     font-size: 1.50em;

@@ -1,5 +1,10 @@
 
-addNavLinks(["Description", "Video", "Request"]);
+
+textLinkClickHandler(document.getElementsByClassName("nav-link"));
+
+textLinkClickHandler(document.getElementsByClassName("welcomeLink"));
+
+[...document.getElementById("productDescription").getElementsByTagName("img")].forEach(image=>image.onmouseover = imageMouseOver);
 
 const tag = document.createElement('script');
 
@@ -28,19 +33,30 @@ function onPlayerReady(event) {
     event.target.mute();
 }
 
-function addNavLinks(arrayOfTitles) {
 
-    arrayOfTitles.forEach(title => {
-        const newNavLink = document.createElement("span");
-        newNavLink.classList.add("nav-link");
-        newNavLink.appendChild(document.createTextNode(title));
-        newNavLink.onclick = onClickHandler;
-        document.getElementById("header").appendChild(newNavLink);
+
+
+function textLinkClickHandler(textLinkHTMLcollection) {
+    [...textLinkHTMLcollection].forEach(link => {
+        link.onclick = onClickHandler;
+
     });
 }
 
 function onClickHandler(event) {
-    document.getElementById("product" + event.target.innerText).scrollIntoView({ block: "start", behavior: "smooth" });
+
+    const regEx = new RegExp(/[a-z]+/);
+
+    let targetString = regEx.exec(event.target.classList[1])[0];
+
+    targetString = targetString.slice(0, 1).toUpperCase() + targetString.slice(1);
+
+    document.getElementById("product" + targetString).scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
+function imageMouseOver(event){
+
+    console.log(event.target);
+
+}
 
