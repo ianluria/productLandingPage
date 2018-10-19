@@ -4,7 +4,33 @@ textLinkClickHandler(document.getElementsByClassName("nav-link"));
 
 textLinkClickHandler(document.getElementsByClassName("welcomeLink"));
 
-[...document.getElementById("productDescription").getElementsByTagName("img")].forEach(image=>image.onmouseover = imageMouseOver);
+[...document.getElementById("productDescription").getElementsByTagName("img")].forEach(image => image.onmouseover = imageMouseOver);
+
+
+
+adjustFlipBoxForImageHeight(document.getElementsByClassName("flipBox"));
+
+
+
+function adjustFlipBoxForImageHeight(collectionOfFlipBoxes) {
+
+    [...collectionOfFlipBoxes].forEach(flipBox => {
+
+        const flipBoxInner = [...flipBox.children].find(child => [...child.classList].includes("flipBoxInner"));
+
+        const arrayOfFlipSurfaces = [...flipBoxInner.children].filter(child => [...child.classList].some(className => className === "flipBoxFront" || className === "flipBoxBack"));
+
+        console.log(arrayOfFlipSurfaces);
+
+    });
+
+}
+
+
+
+
+
+
 
 const tag = document.createElement('script');
 
@@ -54,9 +80,9 @@ function onClickHandler(event) {
     document.getElementById("product" + targetString).scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
-function imageMouseOver(event){
+function imageMouseOver(event) {
 
-    console.log(event.target);
+
 
 }
 

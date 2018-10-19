@@ -65,13 +65,49 @@ body{
     padding: 0px;
 }
 
-.descriptionBlock>img{
+
+.flipBox{
+    background-color: transparent;
+    min-height: 50vh;
+    perspective: 1000px;
+}
+
+.flipBoxInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flipBox:hover .flipBoxInner {
+    transform: rotateY(180deg);
+}
+
+.flipBoxFront, .flipBoxBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.flipBoxFront {
+    background-color: #bbb;
+    color: black;
+}
+
+.flipBoxFront>img, .flipBoxBack>img{
     max-width: 15vw;
     height: auto;
-    margin: auto;
-    margin-bottom: 5vh;
-
 }
+
+.flipBoxBack {
+    background-color: dodgerblue;
+    color: white;
+    transform: rotateY(180deg);
+}
+
 
 #productVideo{
     background: lightgoldenrodyellow;
