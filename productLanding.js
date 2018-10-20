@@ -11,23 +11,52 @@ textLinkClickHandler(document.getElementsByClassName("welcomeLink"));
 adjustFlipBoxForImageHeight(document.getElementsByClassName("flipBox"));
 
 
-
+//adjust for window resize for responsiveness 
 function adjustFlipBoxForImageHeight(collectionOfFlipBoxes) {
 
-    [...collectionOfFlipBoxes].forEach(flipBox => {
+    [...collectionOfFlipBoxes].forEach((flipBox, index) => {
 
-        const flipBoxInner = [...flipBox.children].find(child => [...child.classList].includes("flipBoxInner"));
 
-        const arrayOfFlipSurfaces = [...flipBoxInner.children].filter(child => [...child.classList].some(className => className === "flipBoxFront" || className === "flipBoxBack"));
+        flipBox.id = "flipBox" + index;
 
-        console.log(arrayOfFlipSurfaces);
+        const flipBoxInner = getChildElementByClassName(flipBox.children, "flipBoxInner");
+
+        // const arrayOfFlipSurfaces = [...flipBoxInner.children].filter(child => [...child.classList].some(className => className === "flipBoxFront" || className === "flipBoxBack"));
+
+        let arrayOfFlipSurfaces = new Array(0);
+        arrayOfFlipSurfaces.push(getChildElementByClassName(flipBoxInner.children, "flipBoxFront"));
+
+        arrayOfFlipSurfaces = arrayOfFlipSurfaces.concat(getChildElementByClassName(flipBoxInner.children, "flipBoxBack"));
+
+        arrayOfImages = arrayOfFlipSurfaces.map(surface => getChildElementByClassName(surface.children, "surfaceImage").height);
+
+
+
+        const maxHeight = arrayOfImages.reduce(getMaxHeight, 0);
+
+
+        document.getElementById(flipBox.id).setAttribute("style", "min-height: " + maxHeight + "px;");
 
     });
 
 }
 
+function getMaxHeight(maxHeight, currentHeight) {
 
 
+
+    return (currentHeight > maxHeight ? currentHeight : maxHeight);
+
+}
+
+
+function getChildElementByClassName(listOfChildren, className) {
+
+    const arrayOfMatchingChildren = [...listOfChildren].filter(child => [...child.classList].includes(className));
+
+    return (arrayOfMatchingChildren.length === 1 ? arrayOfMatchingChildren[0] : arrayOfMatchingChildren);
+
+}
 
 
 

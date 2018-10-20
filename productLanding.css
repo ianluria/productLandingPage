@@ -68,7 +68,7 @@ body{
 
 .flipBox{
     background-color: transparent;
-    min-height: 50vh;
+    /* min-height: 50vh; */
     perspective: 1000px;
 }
 
