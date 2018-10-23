@@ -21,7 +21,7 @@ body{
     justify-content: space-around;
     align-items: center;
     background: #f2f2f2;  
-    /* border: 1px solid black; */
+    z-index: 100;
 }
 
 #productWelcome{
@@ -37,20 +37,41 @@ body{
     align-items: center;
     margin: auto;
     /* height: 10vh; */
-    padding: 1.5%;
+    padding: 0.5%;
     position: relative;
     top: 10vh;
 }
 
 .welcomeLink{
     font-size: 1.4em;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 1% 2%;
+
+
+}
+
+.welcomeLink:hover{
+    font-weight: bold;
 }
 
 #productDescription{
    background: lightblue;
+   display: flex;
+   flex-direction: column;
+   justify-content:center;
+   align-items: center; 
+}
+
+#productDescription>h1{
+    margin-bottom: 10vh;
+}
+
+#descriptionContainer{
     display: flex;
     justify-content: space-around;
-    align-items: center;  
+    align-items: center; 
+    width: 75%;
 }
 
 .descriptionBlock{
@@ -60,16 +81,21 @@ body{
     text-align: center;
 }
 
+.descriptionBlock>p{
+    font-weight: bold;
+}
+
 .descriptionBlock>ul{
     list-style-type: none;
     padding: 0px;
+    align-self: flex-end;
 }
 
 
 .flipBox{
     background-color: transparent;
-    /* min-height: 50vh; */
     perspective: 1000px;
+    height: 40vh;
 }
 
 .flipBoxInner {
@@ -92,44 +118,51 @@ body{
     backface-visibility: hidden;
 }
 
-.flipBoxFront {
-    background-color: #bbb;
-    color: black;
-}
 
 .flipBoxFront>img, .flipBoxBack>img{
     max-width: 15vw;
     height: auto;
+    z-index: 90;
 }
 
 .flipBoxBack {
-    background-color: dodgerblue;
-    color: white;
     transform: rotateY(180deg);
 }
 
 
 #productVideo{
-    background: lightgoldenrodyellow;
+    background: white;
     display: flex;
-   justify-content: center;
-   align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid black;
+
 }
 
-#videoContainer>h1{
-    font-size: 1.5em;
-
+#productVideo>h1{
+    font-size: 2em;
+    margin-bottom: 5vh;
 }
 
-#videoContainer>h2{
+#productVideo>h2{
 font-size: 1.1em;
-text-align: center;
 }
 
-#playerContainer{
-    margin: auto;
-    width: 641px;
-    margin-top: 10vh;
+/* #playerContainer{
+    position: relative;
+    padding-bottom: 56.45%;
+    height: 0;
+    width: 50%;
+} */
+
+#productVideo>iframe{
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+    width: 33vw;
+    height: 33vh;
 }
 
 #productRequest{

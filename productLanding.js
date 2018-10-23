@@ -1,62 +1,52 @@
-
+//resize flipBox on resize
 
 textLinkClickHandler(document.getElementsByClassName("nav-link"));
 
 textLinkClickHandler(document.getElementsByClassName("welcomeLink"));
 
-[...document.getElementById("productDescription").getElementsByTagName("img")].forEach(image => image.onmouseover = imageMouseOver);
+//adjustFlipBoxForImageHeight(document.getElementsByClassName("flipBox"));
+
+//const resizeAdjust = adjustFlipBoxForImageHeight(document.getElementsByClassName("flipBox"));
+
+// window.onresize = () => adjustFlipBoxForImageHeight(adjustFlipBoxForImageHeight(document.getElementsByClassName("flipBox")));
+
+// function adjustFlipBoxForImageHeight(collectionOfFlipBoxes) {
+
+//     console.log("running");
+
+//     [...collectionOfFlipBoxes].forEach((flipBox, index) => {
+
+//         flipBox.id = "flipBox" + index;
+
+//         const flipBoxInner = getChildElementByClassName(flipBox.children, "flipBoxInner");
+
+//         let arrayOfFlipSurfaces = new Array(0);
+
+//         arrayOfFlipSurfaces.push(getChildElementByClassName(flipBoxInner.children, "flipBoxFront"));
+
+//         arrayOfFlipSurfaces = arrayOfFlipSurfaces.concat(getChildElementByClassName(flipBoxInner.children, "flipBoxBack"));
+
+//         const arrayOfImageHeights = arrayOfFlipSurfaces.map(surface => getChildElementByClassName(surface.children, "surfaceImage").height);
+
+//         const maxHeight = arrayOfImageHeights.reduce(getMaxHeight, 0);
+
+//         document.getElementById(flipBox.id).setAttribute("style", "min-height: " + maxHeight + "px;");
+//     });
+// }
+
+// function getMaxHeight(maxHeight, currentHeight) {
+
+//     return (currentHeight > maxHeight ? currentHeight : maxHeight);
+// }
 
 
+// function getChildElementByClassName(listOfChildren, className) {
 
-adjustFlipBoxForImageHeight(document.getElementsByClassName("flipBox"));
+//     const arrayOfMatchingChildren = [...listOfChildren].filter(child => [...child.classList].includes(className));
 
+//     return (arrayOfMatchingChildren.length === 1 ? arrayOfMatchingChildren[0] : arrayOfMatchingChildren);
 
-//adjust for window resize for responsiveness 
-function adjustFlipBoxForImageHeight(collectionOfFlipBoxes) {
-
-    [...collectionOfFlipBoxes].forEach((flipBox, index) => {
-
-
-        flipBox.id = "flipBox" + index;
-
-        const flipBoxInner = getChildElementByClassName(flipBox.children, "flipBoxInner");
-
-        // const arrayOfFlipSurfaces = [...flipBoxInner.children].filter(child => [...child.classList].some(className => className === "flipBoxFront" || className === "flipBoxBack"));
-
-        let arrayOfFlipSurfaces = new Array(0);
-        arrayOfFlipSurfaces.push(getChildElementByClassName(flipBoxInner.children, "flipBoxFront"));
-
-        arrayOfFlipSurfaces = arrayOfFlipSurfaces.concat(getChildElementByClassName(flipBoxInner.children, "flipBoxBack"));
-
-        arrayOfImages = arrayOfFlipSurfaces.map(surface => getChildElementByClassName(surface.children, "surfaceImage").height);
-
-
-
-        const maxHeight = arrayOfImages.reduce(getMaxHeight, 0);
-
-
-        document.getElementById(flipBox.id).setAttribute("style", "min-height: " + maxHeight + "px;");
-
-    });
-
-}
-
-function getMaxHeight(maxHeight, currentHeight) {
-
-
-
-    return (currentHeight > maxHeight ? currentHeight : maxHeight);
-
-}
-
-
-function getChildElementByClassName(listOfChildren, className) {
-
-    const arrayOfMatchingChildren = [...listOfChildren].filter(child => [...child.classList].includes(className));
-
-    return (arrayOfMatchingChildren.length === 1 ? arrayOfMatchingChildren[0] : arrayOfMatchingChildren);
-
-}
+// }
 
 
 
@@ -72,6 +62,8 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('youTubePlayer', {
         height: '390',
         width: '640',
+        // height: "100%",
+        // width: "100%",
         videoId: 't1nRXlsUKFs',
         playerVars: {
             controls: '0',
@@ -90,11 +82,9 @@ function onPlayerReady(event) {
 
 
 
-
 function textLinkClickHandler(textLinkHTMLcollection) {
     [...textLinkHTMLcollection].forEach(link => {
         link.onclick = onClickHandler;
-
     });
 }
 
@@ -109,9 +99,5 @@ function onClickHandler(event) {
     document.getElementById("product" + targetString).scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
-function imageMouseOver(event) {
 
-
-
-}
 
