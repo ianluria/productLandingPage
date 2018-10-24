@@ -14,6 +14,7 @@ body{
 
 #header{
     min-width: 100vw;
+    max-width: 100vw;
     min-height: 7vh;
     position: sticky;
     top: 0;
@@ -25,21 +26,43 @@ body{
 }
 
 #productWelcome{
-    background: url(oldsaltplant.jpg) no-repeat center local;
+    background: url(oldsaltplantbw1.png) no-repeat center local;
     background-size: cover;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5vh 0vw;
+}   
+
+#welcomeHead{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 90vw;
+    max-height: 33vh;
+}
+
+#welcomeLogo{
+    max-width: 90vw;
+}
+
+#welcomeText{
+    font-size: 1.4em;
+    text-align: center;
 }
 
 #welcomeLinks{
     background: #ffffff;
-    max-width: 50vw;
+    min-width: 50vw;
+    max-width: 100vw;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: auto;
-    /* height: 10vh; */
     padding: 0.5%;
-    position: relative;
-    top: 10vh;
+    position: absolute;
+    top: 30vh;
 }
 
 .welcomeLink{
@@ -47,8 +70,6 @@ body{
     border: 1px solid black;
     border-radius: 25px;
     padding: 1% 2%;
-
-
 }
 
 .welcomeLink:hover{
@@ -61,10 +82,6 @@ body{
    flex-direction: column;
    justify-content:center;
    align-items: center; 
-}
-
-#productDescription>h1{
-    margin-bottom: 10vh;
 }
 
 #descriptionContainer{
@@ -95,7 +112,7 @@ body{
 .flipBox{
     background-color: transparent;
     perspective: 1000px;
-    height: 40vh;
+    min-height: 37vh;
 }
 
 .flipBoxInner {
@@ -120,8 +137,7 @@ body{
 
 
 .flipBoxFront>img, .flipBoxBack>img{
-    max-width: 15vw;
-    height: auto;
+    max-height: 35vh;
     z-index: 90;
 }
 
