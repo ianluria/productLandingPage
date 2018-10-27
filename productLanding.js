@@ -1,43 +1,11 @@
-//resize flipBox on resize
+
 
 textLinkClickHandler(document.getElementsByClassName("nav-link"));
 
 textLinkClickHandler(document.getElementsByClassName("welcomeLink"));
 
-//adjustFlipBoxForImageHeight(document.getElementsByClassName("flipBox"));
+document.getElementById("cloroxBack").onclick = enlargeImageOnClick;
 
-//const resizeAdjust = adjustFlipBoxForImageHeight(document.getElementsByClassName("flipBox"));
-
-// window.onresize = () => adjustFlipBoxForImageHeight(adjustFlipBoxForImageHeight(document.getElementsByClassName("flipBox")));
-
-// function adjustFlipBoxForImageHeight(collectionOfFlipBoxes) {
-
-//     console.log("running");
-
-//     [...collectionOfFlipBoxes].forEach((flipBox, index) => {
-
-//         flipBox.id = "flipBox" + index;
-
-//         const flipBoxInner = getChildElementByClassName(flipBox.children, "flipBoxInner");
-
-//         let arrayOfFlipSurfaces = new Array(0);
-
-//         arrayOfFlipSurfaces.push(getChildElementByClassName(flipBoxInner.children, "flipBoxFront"));
-
-//         arrayOfFlipSurfaces = arrayOfFlipSurfaces.concat(getChildElementByClassName(flipBoxInner.children, "flipBoxBack"));
-
-//         const arrayOfImageHeights = arrayOfFlipSurfaces.map(surface => getChildElementByClassName(surface.children, "surfaceImage").height);
-
-//         const maxHeight = arrayOfImageHeights.reduce(getMaxHeight, 0);
-
-//         document.getElementById(flipBox.id).setAttribute("style", "min-height: " + maxHeight + "px;");
-//     });
-// }
-
-// function getMaxHeight(maxHeight, currentHeight) {
-
-//     return (currentHeight > maxHeight ? currentHeight : maxHeight);
-// }
 
 
 // function getChildElementByClassName(listOfChildren, className) {
@@ -48,6 +16,31 @@ textLinkClickHandler(document.getElementsByClassName("welcomeLink"));
 
 // }
 
+function enlargeImageOnClick(event) {
+    image = event.target;
+    console.log("click");
+
+
+    const temp = document.getElementById("temporaryImageContainer");
+    console.log(1, temp.style.left);
+    if (temp.style.left === "0vw") {
+        console.log("greater than or equal to zero");
+        temp.style.left = "-999em";
+    } else {
+        temp.style.left = "0vw";
+        console.log("less than zero");
+        if (temp.childElementCount === 0) {
+            const image2 = image.cloneNode();
+
+            image2.style.maxHeight = "80vh";
+
+            temp.appendChild(image2);
+
+            image2.onclick = enlargeImageOnClick;
+        }
+    }
+
+}
 
 
 
