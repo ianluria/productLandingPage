@@ -16,31 +16,82 @@ document.getElementById("cloroxBack").onclick = enlargeImageOnClick;
 
 // }
 
-function enlargeImageOnClick(event) {
-    image = event.target;
-    console.log("click");
 
+
+
+function enlargeImageOnClick(event) {
+    const image = event.target;
 
     const temp = document.getElementById("temporaryImageContainer");
-    console.log(1, temp.style.left);
+
     if (temp.style.left === "0vw") {
-        console.log("greater than or equal to zero");
+
         temp.style.left = "-999em";
     } else {
         temp.style.left = "0vw";
-        console.log("less than zero");
+
         if (temp.childElementCount === 0) {
             const image2 = image.cloneNode();
-
+            image2.id = "enlargedImage";
             image2.style.maxHeight = "80vh";
 
             temp.appendChild(image2);
 
-            image2.onclick = enlargeImageOnClick;
+            zoomedImage = document.createElement("div");
+            zoomedImage.id = "zoomedImage";
+
+            temp.appendChild(zoomedImage);
+
+            image2.onclick = enlargeImageOnClick; //check this
+
+            addZoomer(image2);
         }
     }
-
 }
+
+function addZoomer(element) {
+
+    element.addEventListener('mousemove', function (e) {
+
+        // console.log("entered listener");
+        console.log(e);
+
+        let original = document.getElementById('enlargedImage'),
+            magnified = document.getElementById('zoomedImage'),
+            style = magnified.style,
+            x = e.offsetX,
+            y = e.offsetY,
+            imgWidth = original.width,
+            imgHeight = original.height,
+            xperc = ((x / imgWidth) * 100),
+            yperc = ((y / imgHeight) * 100);
+
+        //console.log("x", x, "y", y, "xperc", xperc, "yperc", yperc);
+
+
+        if (x > (.01 * imgWidth)) {
+            xperc += (.15 * xperc); //.15
+        };//lets user scroll past right edge of image
+
+        if (y >= (.01 * imgHeight)) {
+            yperc += (.15 * yperc); //.15
+        };//lets user scroll past bottom edge of image
+
+        style.backgroundPositionX = (xperc - 9) + '%'; //-9
+        style.backgroundPositionY = (yperc - 9) + '%'; //-9
+        /*
+                style.left = (e.clientX-(x/2) ) + 'px'; //-180
+                style.top = (e.clientY-(y/2)) + 'px'; //-180
+        
+        */
+
+        style.left = (e.clientX-180) + 'px'; 
+        style.top = e.clientY-180 + 'px';
+
+        console.log("y", (e.clientY / e.target.parentNode.offsetHeight) * 100);
+
+    });
+};
 
 
 
