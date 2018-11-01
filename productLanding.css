@@ -154,7 +154,7 @@ body{
 }
 
 
-.flipBoxFront>img, .flipBoxBack>img{
+.surfaceImage{
     max-height: 35vh;
     z-index: 90;
 }
@@ -175,15 +175,27 @@ body{
     justify-content: center;
 }
 
-#temporaryImageContainer:hover, #temporaryImageContainer:active {
+/* #temporaryImageContainer:hover, #temporaryImageContainer:active {
     cursor: zoom-in;
-    /* display: block; */
+    // display: block; 
 }
 
 #temporaryImageContainer:hover>#zoomedImage, #temporaryImageContainer:active>#zoomedImage {
     opacity: 1;
+} */
+
+#enlargedImage:hover, #enlargedImage:active {
+    cursor: zoom-in;
+   
 }
 
+/* #enlargedImage:hover>#zoomedImage, #enlargedImage:active>#zoomedImage {
+    opacity: 1;
+} */
+#enlargedImage{
+    border: black solid 1px;
+    box-sizing: content-box;
+}
 #zoomedImage {
     width: 340px;
     height: 340px;

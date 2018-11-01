@@ -27,49 +27,93 @@ function enlargeImageOnClick(event) {
     if (temp.style.left === "0vw") {
 
         temp.style.left = "-999em";
+
+        while (temp.firstChild) {
+            temp.removeChild(temp.firstChild);
+        }
+
     } else {
         temp.style.left = "0vw";
 
         if (temp.childElementCount === 0) {
             const image2 = image.cloneNode();
+            image2.classList.remove("surfaceImage");
             image2.id = "enlargedImage";
             image2.style.maxHeight = "80vh";
-
+            addPadding(image2);
             temp.appendChild(image2);
 
             zoomedImage = document.createElement("div");
             zoomedImage.id = "zoomedImage";
 
+            image2.onmouseover = (event) => {
+                zoomedImage.style.opacity = 1;
+            }
             temp.appendChild(zoomedImage);
 
-            image2.onclick = enlargeImageOnClick; //check this
 
+            image2.onclick = (event2) => {
+                console.log(event2);
+                console.log(document.getElementById("zoomedImage").style);
+
+                //enlargeImageOnClick; //check this
+            }
             addZoomer(image2);
         }
     }
 }
 
+//may be able to use pure css
+function addPadding(element) {
+
+    // const paddingX = element.width * 0.1,
+    //     paddingY = element.height * 0.1;
+
+    const paddingX = "10vw",
+        paddingY = "10vh";
+
+
+    console.log(paddingX, paddingY);
+    element.style.paddingLeft = `${paddingX}`;
+    element.style.paddingRight = `${paddingX}`;
+    element.style.paddingTop = `${paddingY}`;
+    element.style.paddingBottom = `${paddingY}`;
+}
+
 function addZoomer(element) {
 
     element.addEventListener('mousemove', function (e) {
-
-        // console.log("entered listener");
-        console.log(e);
-
-        let original = document.getElementById('enlargedImage'),
+        //console.log(e.pageX, e.pageY);
+        const original = document.getElementById('enlargedImage'),
             magnified = document.getElementById('zoomedImage'),
             style = magnified.style,
-            x = e.offsetX,
-            y = e.offsetY,
             imgWidth = original.width,
-            imgHeight = original.height,
-            xperc = ((x / imgWidth) * 100),
+            imgHeight = original.height;
+        // x = e.offsetX,
+        // y = e.offsetY,
+        // xperc = ((x / imgWidth) * 100),
+        // yperc = ((y / imgHeight) * 100);
+
+
+        const x = e.offsetX - ((e.target.clientWidth - imgWidth) / 2),
+            y = e.offsetY - ((e.target.clientHeight - imgHeight) / 2);
+
+        let xperc = ((x / imgWidth) * 100),
             yperc = ((y / imgHeight) * 100);
 
-        //console.log("x", x, "y", y, "xperc", xperc, "yperc", yperc);
+       
 
 
-        if (x > (.01 * imgWidth)) {
+        // let ratioX = imgWidth / e.target.clientWidth;
+        // console.log("ratio", ratioX);
+        // let testX = ((((e.offsetX + (e.offsetX*ratioX))/imgWidth))*100);
+
+        // console.log("testx", testX);
+
+        // x = e.offsetX*((original.width/e.clientWidth)*100);
+        // y = e.offsetY*((original.height/e.clientHeight)*100);
+
+        if (x >= (.01 * imgWidth)) {
             xperc += (.15 * xperc); //.15
         };//lets user scroll past right edge of image
 
@@ -77,18 +121,14 @@ function addZoomer(element) {
             yperc += (.15 * yperc); //.15
         };//lets user scroll past bottom edge of image
 
+        console.log("x", x, "y", y, "xperc", xperc, "yperc", yperc);
+
+
         style.backgroundPositionX = (xperc - 9) + '%'; //-9
         style.backgroundPositionY = (yperc - 9) + '%'; //-9
-        /*
-                style.left = (e.clientX-(x/2) ) + 'px'; //-180
-                style.top = (e.clientY-(y/2)) + 'px'; //-180
-        
-        */
 
-        style.left = (e.clientX-180) + 'px'; 
-        style.top = e.clientY-180 + 'px';
-
-        console.log("y", (e.clientY / e.target.parentNode.offsetHeight) * 100);
+        style.left = e.clientX - 180 + 'px';
+        style.top = e.clientY - 180 + 'px';
 
     });
 };
