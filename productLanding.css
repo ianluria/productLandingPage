@@ -5,7 +5,7 @@
 
 body{
     font-family: 'Open Sans', sans-serif;
-    min-width: 100vw;
+    /* min-width: 100vw; */
 }
 
 .panel{
@@ -23,7 +23,7 @@ body{
     justify-content: space-around;
     align-items: center;
     background: #f2f2f2;  
-    z-index: 100;
+    z-index: 200;
 }
 
 .nav-link{
@@ -175,31 +175,20 @@ body{
     justify-content: center;
 }
 
-/* #temporaryImageContainer:hover, #temporaryImageContainer:active {
-    cursor: zoom-in;
-    // display: block; 
-}
-
-#temporaryImageContainer:hover>#zoomedImage, #temporaryImageContainer:active>#zoomedImage {
-    opacity: 1;
-} */
-
 #enlargedImage:hover, #enlargedImage:active {
     cursor: zoom-in;
    
 }
 
-/* #enlargedImage:hover>#zoomedImage, #enlargedImage:active>#zoomedImage {
-    opacity: 1;
-} */
 #enlargedImage{
-    border: black solid 1px;
     box-sizing: content-box;
+    padding: 10vh 10vw;
 }
+
 #zoomedImage {
     width: 340px;
     height: 340px;
-    background: url(saltRear.png) no-repeat #FFF;
+    /* background: url(saltRear.png) no-repeat #FFF; */
     box-shadow: 0 5px 10px -2px rgba(0,0,0,0.3);
     pointer-events: none;
     position: absolute;
@@ -230,7 +219,10 @@ body{
 font-size: 1.0em;
 text-align: left;
 max-width: 45vw;
-margin-bottom: 6vh;
+margin: 1vh 0vw 3vh 0vw;
+padding: 1vw 2vh;
+text-align: center;
+color: #333333;
 }
 
 /* #playerContainer{
@@ -257,12 +249,8 @@ margin-bottom: 6vh;
 }
 
 #productRequest>h1{
-    margin-bottom: 12vh;
+    margin-bottom: 8vh;
 }
-
-/* #productRequest>form{
-    max-width: 75vw;
-} */
 
 #productRequest input[type="submit"]{
     float: right;
@@ -280,7 +268,6 @@ margin-bottom: 6vh;
 .regularFontSize{
     font-size: 1.4em;
 }
-
 
 
 @media screen and (max-width: 600px) {
@@ -336,7 +323,7 @@ margin-bottom: 6vh;
 }
 
 #productVideo>p{
-    font-size: .55em;
+    font-size: .80em;
     max-width: 75vw;
 }
 

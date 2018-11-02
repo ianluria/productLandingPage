@@ -1,27 +1,19 @@
 
 
+//fix mobile layout for onmouseover zooming --disable
+//fix font sizes for mobile
+
+
 textLinkClickHandler(document.getElementsByClassName("nav-link"));
 
 textLinkClickHandler(document.getElementsByClassName("welcomeLink"));
 
-document.getElementById("cloroxBack").onclick = enlargeImageOnClick;
+//document.getElementById("cloroxBack").onclick = enlargeImageOnClick;
 
-
-
-// function getChildElementByClassName(listOfChildren, className) {
-
-//     const arrayOfMatchingChildren = [...listOfChildren].filter(child => [...child.classList].includes(className));
-
-//     return (arrayOfMatchingChildren.length === 1 ? arrayOfMatchingChildren[0] : arrayOfMatchingChildren);
-
-// }
-
-
-
+[...document.getElementsByClassName("rearFlipImage")].forEach(rearImage => rearImage.onclick = enlargeImageOnClick);
 
 function enlargeImageOnClick(event) {
     const image = event.target;
-
     const temp = document.getElementById("temporaryImageContainer");
 
     if (temp.style.left === "0vw") {
@@ -31,87 +23,60 @@ function enlargeImageOnClick(event) {
         while (temp.firstChild) {
             temp.removeChild(temp.firstChild);
         }
-
     } else {
         temp.style.left = "0vw";
 
         if (temp.childElementCount === 0) {
-            const image2 = image.cloneNode();
-            image2.classList.remove("surfaceImage");
-            image2.id = "enlargedImage";
-            image2.style.maxHeight = "80vh";
-            addPadding(image2);
-            temp.appendChild(image2);
-
-            zoomedImage = document.createElement("div");
-            zoomedImage.id = "zoomedImage";
-
-            image2.onmouseover = (event) => {
-                zoomedImage.style.opacity = 1;
-            }
-            temp.appendChild(zoomedImage);
-
-
-            image2.onclick = (event2) => {
-                console.log(event2);
-                console.log(document.getElementById("zoomedImage").style);
-
-                //enlargeImageOnClick; //check this
-            }
-            addZoomer(image2);
+            createImageZooming(image, temp);
         }
     }
 }
 
-//may be able to use pure css
-function addPadding(element) {
+function createImageZooming(image, temporaryContainerDiv) {
 
-    // const paddingX = element.width * 0.1,
-    //     paddingY = element.height * 0.1;
+    const image2 = image.cloneNode();
+    image2.classList.remove("surfaceImage");
+    image2.id = "enlargedImage";
+    image2.style.maxHeight = "80vh";
+    temporaryContainerDiv.appendChild(image2);
 
-    const paddingX = "10vw",
-        paddingY = "10vh";
+    zoomedImage = document.createElement("div");
+    zoomedImage.id = "zoomedImage";
+    zoomedImage.style.background = `url(${image2.src}) no-repeat #FFF`;
+
+    //
+
+    addZoomer(image2);
+
+    temporaryContainerDiv.appendChild(zoomedImage);
 
 
-    console.log(paddingX, paddingY);
-    element.style.paddingLeft = `${paddingX}`;
-    element.style.paddingRight = `${paddingX}`;
-    element.style.paddingTop = `${paddingY}`;
-    element.style.paddingBottom = `${paddingY}`;
+    image2.onclick = (event2) => {
+
+        if (zoomedImage.style.opacity === "1") {
+            zoomedImage.style.opacity = "0";
+        } else {
+            enlargeImageOnClick(event2)
+        }
+    }
 }
 
 function addZoomer(element) {
 
-    element.addEventListener('mousemove', function (e) {
-        //console.log(e.pageX, e.pageY);
+    element.addEventListener('mousemove', function (event) {
         const original = document.getElementById('enlargedImage'),
             magnified = document.getElementById('zoomedImage'),
             style = magnified.style,
             imgWidth = original.width,
             imgHeight = original.height;
-        // x = e.offsetX,
-        // y = e.offsetY,
-        // xperc = ((x / imgWidth) * 100),
-        // yperc = ((y / imgHeight) * 100);
 
+        magnified.style.opacity = 1;
 
-        const x = e.offsetX - ((e.target.clientWidth - imgWidth) / 2),
-            y = e.offsetY - ((e.target.clientHeight - imgHeight) / 2);
+        const x = event.offsetX - ((event.target.clientWidth - imgWidth) / 2),
+            y = event.offsetY - ((event.target.clientHeight - imgHeight) / 2);
 
         let xperc = ((x / imgWidth) * 100),
             yperc = ((y / imgHeight) * 100);
-
-       
-
-
-        // let ratioX = imgWidth / e.target.clientWidth;
-        // console.log("ratio", ratioX);
-        // let testX = ((((e.offsetX + (e.offsetX*ratioX))/imgWidth))*100);
-
-        // console.log("testx", testX);
-
-        // x = e.offsetX*((original.width/e.clientWidth)*100);
-        // y = e.offsetY*((original.height/e.clientHeight)*100);
 
         if (x >= (.01 * imgWidth)) {
             xperc += (.15 * xperc); //.15
@@ -121,18 +86,15 @@ function addZoomer(element) {
             yperc += (.15 * yperc); //.15
         };//lets user scroll past bottom edge of image
 
-        console.log("x", x, "y", y, "xperc", xperc, "yperc", yperc);
+        // console.log("x", x, "y", y, "xperc", xperc, "yperc", yperc);
 
+        style.backgroundPositionX = (xperc - 9) + '%';
+        style.backgroundPositionY = (yperc - 9) + '%';
 
-        style.backgroundPositionX = (xperc - 9) + '%'; //-9
-        style.backgroundPositionY = (yperc - 9) + '%'; //-9
-
-        style.left = e.clientX - 180 + 'px';
-        style.top = e.clientY - 180 + 'px';
-
+        style.left = event.clientX - 180 + 'px';
+        style.top = event.clientY - 180 + 'px';
     });
 };
-
 
 
 const tag = document.createElement('script');
