@@ -2,19 +2,26 @@
 
 //fix mobile layout for onmouseover zooming --disable
 //fix font sizes for mobile
+//completely different code for mobile and for full 
+//image flipping on hove
+//image zoom
+//elements spilling out
+//set body to be flex and align items by column with minimum heights
 
 
 textLinkClickHandler(document.getElementsByClassName("nav-link"));
 
 textLinkClickHandler(document.getElementsByClassName("welcomeLink"));
 
-//document.getElementById("cloroxBack").onclick = enlargeImageOnClick;
-
-[...document.getElementsByClassName("rearFlipImage")].forEach(rearImage => rearImage.onclick = enlargeImageOnClick);
+if (window.screen.availWidth > 600) {
+    [...document.getElementsByClassName("rearFlipImage")].forEach(rearImage => rearImage.onclick = enlargeImageOnClick);
+}
 
 function enlargeImageOnClick(event) {
     const image = event.target;
-    const temp = document.getElementById("temporaryImageContainer");
+    //const temp = document.getElementById("temporaryImageContainer");
+    const temp = document.createElement("div");
+    temp.id = "temporaryImageContainer";
 
     if (temp.style.left === "0vw") {
 
