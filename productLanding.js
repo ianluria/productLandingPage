@@ -1,12 +1,10 @@
 
 
 //fix mobile layout for onmouseover zooming --disable
-//fix font sizes for mobile
 //completely different code for mobile and for full 
-//image flipping on hove
+//image flipping on hover
 //image zoom
-//elements spilling out
-//set body to be flex and align items by column with minimum heights
+
 
 
 textLinkClickHandler(document.getElementsByClassName("nav-link"));

@@ -1,6 +1,7 @@
 
 html {
     overflow-x: hidden;
+    font-size: 1em;
 }
 
 
@@ -12,6 +13,7 @@ html {
 body{
     font-family: 'Open Sans', sans-serif;
     overflow-x: hidden;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -277,10 +279,10 @@ color: #333333;
 }
 
 
-}
+
 
 .regularFontSize{
-    font-size: 1.4em;
+    font-size: 1rem;
 }
 
 
@@ -292,13 +294,12 @@ color: #333333;
 }
 
 #welcomeText{
-    font-size: 1.3em;
+    font-size: 1rem;
 }
 
 #welcomeLinks{
     min-width: 50vw;
     flex-direction: column;
-    font-size: 1.3em;
     min-height: 25vh;
     background: rgba(204, 204, 204, 0.8);
     position: static;
@@ -307,13 +308,14 @@ color: #333333;
     padding: 2vh 0vw;
 }
 
+
 .nav-link:hover{
     font-size: 0.8em;
     text-decoration: underline;
 }
 
 #productDescription>h1{
-    font-size: 1.4em;
+    font-size: 1.2em;
 }
 
 #descriptionContainer{
@@ -337,8 +339,10 @@ color: #333333;
 }
 
 #productVideo>p{
-    font-size: .80em;
-    max-width: 75vw;
+    font-size: 0.85rem;
+    max-width: 90vw;
+    text-align: justify;
+    margin: 0 0 5vh 0;
 }
 
 #productVideo>iframe{
@@ -347,7 +351,7 @@ color: #333333;
 }
 
 .regularFontSize, li {
-    font-size: .8em;
+    font-size: .9rem;
 }
 
 
