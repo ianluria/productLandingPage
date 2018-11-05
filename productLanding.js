@@ -5,7 +5,16 @@
 //image flipping on hover
 //image zoom
 
+const headerElement = document.getElementById("header");
 
+const headerInitialTop = headerElement.offsetTop;
+document.body.onscroll = (event) => {
+    if (window.scrollY >= headerInitialTop) {
+        headerElement.style.position = "fixed";
+    } else {
+        headerElement.style.position = "static";
+    }
+}
 
 textLinkClickHandler(document.getElementsByClassName("nav-link"));
 
