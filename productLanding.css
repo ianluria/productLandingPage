@@ -155,9 +155,9 @@ body{
     transform-style: preserve-3d;
 }
 
-.flipBox:hover .flipBoxInner {
+/* .flipBox:hover .flipBoxInner {
     transform: rotateY(180deg);
-}
+} */
 
 .flipBoxFront, .flipBoxBack {
     position: absolute;

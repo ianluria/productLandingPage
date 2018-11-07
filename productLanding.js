@@ -4,7 +4,7 @@
 //completely different code for mobile and for full 
 //image flipping on hover
 //image zoom
-
+console.log("here");
 const headerElement = document.getElementById("header");
 
 const headerInitialTop = headerElement.offsetTop;
@@ -20,30 +20,82 @@ textLinkClickHandler(document.getElementsByClassName("nav-link"));
 
 textLinkClickHandler(document.getElementsByClassName("welcomeLink"));
 
+console.log(window.screen.availWidth);
+
+if (window.screen.availWidth < 600) {
+    console.log("true");
+    [...document.getElementsByClassName("flipBoxFront")].forEach(flipBox => {
+        flipBox.onclick = (event) => {
+            // console.log(event);
+            const flipBoxOute;
+            let parent = event.parent;
+            while (parent) {
+                if (parent.classList.includes("flipBox")) {
+                    break;
+                } else {
+                    parent = parent.parent;
+                }
+            }
+
+
+            [...document.getElementsByClassName("flipBox")].forEach(element => {
+
+                const flipBoxInner = [...element.children].find(child => child.classList.includes("flipBoxInner"));
+
+                flipBoxInner.style.transform = "rotateY(180deg)";
+            }
+        }
+    });
+
+}
+
+function getOppositeFlipSurface(flipSurface) {
+    let thisSide, oppositeSide;
+    if (flipSurface.classList.contains("flipBoxFront")) {
+        thisSide = "front";
+        oppositeSide = "back";
+    } else if (flipSurface.classList.contains("flipBoxBack")) {
+        thisSide = "back";
+        oppositeSide = "front";
+    }
+
+
+    const parent = flipSurface.parent;
+
+    return [...parent.children].find(element => element.classList.includes(oppositeSide));
+
+}
+
+
 if (window.screen.availWidth > 600) {
+}
+function addImageEnhancements() {
+
     [...document.getElementsByClassName("rearFlipImage")].forEach(rearImage => rearImage.onclick = enlargeImageOnClick);
 }
 
 function enlargeImageOnClick(event) {
     const image = event.target;
-    //const temp = document.getElementById("temporaryImageContainer");
     const temp = document.createElement("div");
     temp.id = "temporaryImageContainer";
 
-    if (temp.style.left === "0vw") {
+    // if (temp.style.left === "0vw") {
 
-        temp.style.left = "-999em";
+    temp.style.left = "-999em";
 
-        while (temp.firstChild) {
-            temp.removeChild(temp.firstChild);
-        }
-    } else {
-        temp.style.left = "0vw";
+    // while (temp.firstChild) {
+    //     temp.removeChild(temp.firstChild);
+    // }
+    // } else {
+    //     temp.style.left = "0vw";
 
-        if (temp.childElementCount === 0) {
-            createImageZooming(image, temp);
-        }
-    }
+    //     if (temp.childElementCount === 0) {
+
+
+    createImageZooming(image, temp);
+
+    //     }
+    // }
 }
 
 function createImageZooming(image, temporaryContainerDiv) {
@@ -57,8 +109,6 @@ function createImageZooming(image, temporaryContainerDiv) {
     zoomedImage = document.createElement("div");
     zoomedImage.id = "zoomedImage";
     zoomedImage.style.background = `url(${image2.src}) no-repeat #FFF`;
-
-    //
 
     addZoomer(image2);
 
