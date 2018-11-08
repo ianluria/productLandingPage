@@ -4,7 +4,9 @@
 //completely different code for mobile and for full 
 //image flipping on hover
 //image zoom
-console.log("here");
+
+
+//header scrolling
 const headerElement = document.getElementById("header");
 
 const headerInitialTop = headerElement.offsetTop;
@@ -20,33 +22,43 @@ textLinkClickHandler(document.getElementsByClassName("nav-link"));
 
 textLinkClickHandler(document.getElementsByClassName("welcomeLink"));
 
-console.log(window.screen.availWidth);
+//console.log(window.screen.availWidth);
+flipBoxRotation();
+window.onresize = flipBoxRotation;
 
-if (window.screen.availWidth < 600) {
-    console.log("true");
-    [...document.getElementsByClassName("flipBoxFront")].forEach(flipBox => {
-        flipBox.onclick = (event) => {
-            // console.log(event);
-            const flipBoxOute;
-            let parent = event.parent;
-            while (parent) {
-                if (parent.classList.includes("flipBox")) {
-                    break;
-                } else {
-                    parent = parent.parent;
+function flipBoxRotation() {
+    if (window.screen.availWidth < 600) {
+
+        [...document.getElementsByClassName("flipBox")].forEach(flipBox => {
+            let counter = 0;
+            flipBox.onclick = (event) => {
+                counter++;
+
+                const innerFlipBox = getParentByClassFromChild(event.target, "flipBoxInner");
+                if (innerFlipBox != null) {
+                    if (counter % 2 != 0) {
+                        innerFlipBox.style.transform = "rotateY(180deg)";
+                    } else {
+                        innerFlipBox.style.transform = "rotateY(0deg)";
+                    }
                 }
             }
+        });
+    }
+}
 
+function getParentByClassFromChild(child, className) {
 
-            [...document.getElementsByClassName("flipBox")].forEach(element => {
+    let parent = child;
+    while (parent != null && parent.classList.length > 0) {
 
-                const flipBoxInner = [...element.children].find(child => child.classList.includes("flipBoxInner"));
-
-                flipBoxInner.style.transform = "rotateY(180deg)";
-            }
+        if (parent.classList.contains(className)) {
+            return parent;
+        } else {
+            parent = parent.parentNode;
         }
-    });
-
+    }
+    return null;
 }
 
 function getOppositeFlipSurface(flipSurface) {
