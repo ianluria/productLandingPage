@@ -1,9 +1,8 @@
 
 
 //fix mobile layout for onmouseover zooming --disable
-//completely different code for mobile and for full 
+
 //image flipping on hover
-//image zoom
 
 
 //header scrolling
@@ -23,18 +22,32 @@ textLinkClickHandler(document.getElementsByClassName("nav-link"));
 textLinkClickHandler(document.getElementsByClassName("welcomeLink"));
 
 //console.log(window.screen.availWidth);
+
 flipBoxRotation();
-window.onresize = flipBoxRotation;
+addImageEnhancements();
+
+// window.onresize = () => {
+//     if (window.screen.availWidth < 600) {
+//         flipBoxRotation();
+//     } else {
+
+
+
+//     }
+// }
+
 
 function flipBoxRotation() {
-    if (window.screen.availWidth < 600) {
 
-        [...document.getElementsByClassName("flipBox")].forEach(flipBox => {
+    [...document.getElementsByClassName("flipBox")].forEach(flipBox => {
+
+        const innerFlipBox = getChildByClassFromParent(flipBox, "flipBoxInner");
+        //image will flip on click for mobile
+        if (window.screen.availWidth < 600) {
             let counter = 0;
             flipBox.onclick = (event) => {
                 counter++;
 
-                const innerFlipBox = getParentByClassFromChild(event.target, "flipBoxInner");
                 if (innerFlipBox != null) {
                     if (counter % 2 != 0) {
                         innerFlipBox.style.transform = "rotateY(180deg)";
@@ -43,44 +56,68 @@ function flipBoxRotation() {
                     }
                 }
             }
-        });
-    }
+        } else {
+            //image will flip on hover for full screen
+            flipBox.onmouseover = (event) => {
+                innerFlipBox.style.transform = "rotateY(180deg)";
+            }
+
+            flipBox.onmouseout = (event) => {
+                innerFlipBox.style.transform = "rotateY(0deg)";
+            }
+        }
+    });
 }
 
-function getParentByClassFromChild(child, className) {
+//may not need
+// function getParentByClassFromChild(child, className) {
 
-    let parent = child;
-    while (parent != null && parent.classList.length > 0) {
+//     let parent = child;
+//     while (parent != null && parent.classList.length > 0) {
 
-        if (parent.classList.contains(className)) {
-            return parent;
-        } else {
-            parent = parent.parentNode;
+//         if (parent.classList.contains(className)) {
+//             return parent;
+//         } else {
+//             parent = parent.parentNode;
+//         }
+//     }
+//     return null;
+// }
+
+function getChildByClassFromParent(parent, className) {
+
+    let child = parent;
+    while (child != null) {
+        if (child.classList.length > 0) {
+            if (child.classList.contains(className)) {
+                return child;
+            }
         }
+        child = child.firstElementChild;
+
     }
     return null;
 }
 
-function getOppositeFlipSurface(flipSurface) {
-    let thisSide, oppositeSide;
-    if (flipSurface.classList.contains("flipBoxFront")) {
-        thisSide = "front";
-        oppositeSide = "back";
-    } else if (flipSurface.classList.contains("flipBoxBack")) {
-        thisSide = "back";
-        oppositeSide = "front";
-    }
+// function getOppositeFlipSurface(flipSurface) {
+//     let thisSide, oppositeSide;
+//     if (flipSurface.classList.contains("flipBoxFront")) {
+//         thisSide = "front";
+//         oppositeSide = "back";
+//     } else if (flipSurface.classList.contains("flipBoxBack")) {
+//         thisSide = "back";
+//         oppositeSide = "front";
+//     }
 
 
-    const parent = flipSurface.parent;
+//     const parent = flipSurface.parent;
 
-    return [...parent.children].find(element => element.classList.includes(oppositeSide));
+//     return [...parent.children].find(element => element.classList.includes(oppositeSide));
 
-}
+// }
 
 
-if (window.screen.availWidth > 600) {
-}
+
 function addImageEnhancements() {
 
     [...document.getElementsByClassName("rearFlipImage")].forEach(rearImage => rearImage.onclick = enlargeImageOnClick);
@@ -88,35 +125,28 @@ function addImageEnhancements() {
 
 function enlargeImageOnClick(event) {
     const image = event.target;
+
     const temp = document.createElement("div");
     temp.id = "temporaryImageContainer";
 
-    // if (temp.style.left === "0vw") {
-
-    temp.style.left = "-999em";
-
-    // while (temp.firstChild) {
-    //     temp.removeChild(temp.firstChild);
-    // }
-    // } else {
-    //     temp.style.left = "0vw";
-
-    //     if (temp.childElementCount === 0) {
-
-
     createImageZooming(image, temp);
 
-    //     }
-    // }
+    document.getElementById("productDescription").appendChild(temp);
 }
 
 function createImageZooming(image, temporaryContainerDiv) {
 
     const image2 = image.cloneNode();
-    image2.classList.remove("surfaceImage");
+    image2.classList.remove("surfaceImage", "rearFlipImage");
     image2.id = "enlargedImage";
-    image2.style.maxHeight = "80vh";
     temporaryContainerDiv.appendChild(image2);
+
+    if (window.screen.availWidth < 600) {
+        const closingX = document.createElement("div");
+        closingX.id = "closingX";
+        closingX.innerText = "X";
+        temporaryContainerDiv.appendChild(closingX);
+    }
 
     zoomedImage = document.createElement("div");
     zoomedImage.id = "zoomedImage";
@@ -126,20 +156,58 @@ function createImageZooming(image, temporaryContainerDiv) {
 
     temporaryContainerDiv.appendChild(zoomedImage);
 
+    temporaryContainerDiv.onclick = (event) => {
 
-    image2.onclick = (event2) => {
-
-        if (zoomedImage.style.opacity === "1") {
-            zoomedImage.style.opacity = "0";
-        } else {
-            enlargeImageOnClick(event2)
+        if (window.screen.availWidth >= 600) {
+            if (zoomedImage.style.opacity === "1") {
+                zoomedImage.style.opacity = "0";
+            } else {
+                deleteChildNodes(document.getElementById("temporaryImageContainer"));
+                document.getElementById("productDescription").removeChild(temporaryContainerDiv);
+            }
+        } else if (event.target === document.getElementById("closingX")) {
+            deleteChildNodes(document.getElementById("temporaryImageContainer"));
+            document.getElementById("productDescription").removeChild(temporaryContainerDiv);
         }
+
+        //    if ( zoomedImage.style.opacity = "0") {
+        //         console.log("else click");
+        //         temporaryContainerDiv.removeChild(image2);
+        //         temporaryContainerDiv.removeChild(zoomedImage);
+        //         document.getElementById("productDescription").removeChild(temporaryContainerDiv);
+        //     }
     }
 }
+
+// function removeElementsFromDOM(arrayOfElements) {
+
+//     arrayOfElements.forEach(element => {
+
+//         const parent = element.parentNode;
+//         parent.removeChild(element);
+
+//     });
+// }
+
+
+function deleteChildNodes(element) {
+
+    [...element.children].forEach(child => {
+
+        if (child.hasChildNodes()) {
+            deleteChildNodes(child);
+        } else {
+            element.removeChild(child);
+        }
+
+    });
+}
+
 
 function addZoomer(element) {
 
     element.addEventListener('mousemove', function (event) {
+
         const original = document.getElementById('enlargedImage'),
             magnified = document.getElementById('zoomedImage'),
             style = magnified.style,
@@ -172,7 +240,7 @@ function addZoomer(element) {
     });
 };
 
-
+//youtube code
 const tag = document.createElement('script');
 
 tag.src = "https://www.youtube.com/iframe_api";
@@ -203,7 +271,7 @@ function onPlayerReady(event) {
 }
 
 
-
+//scroll link code
 function textLinkClickHandler(textLinkHTMLcollection) {
     [...textLinkHTMLcollection].forEach(link => {
         link.onclick = onClickHandler;

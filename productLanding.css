@@ -178,9 +178,10 @@ body{
 
 #temporaryImageContainer{
     position: absolute;
-    left:-999em;
+    /* left:-999em; */
+    left:0em;
     overflow: scroll;
-    background-color: white;
+    background-color: hsla(0, 0%, 100%, 1);
     min-width: 100%;
     min-height: 100%;
     display:flex;
@@ -193,8 +194,24 @@ body{
 }
 
 #enlargedImage{
-    box-sizing: content-box;
-    padding: 10vh 10vw;
+
+    max-height: 80vh;
+}
+
+#closingX{
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    border: black solid 2px;
+    font-size: 1rem;
+    position: absolute;
+    left: 90%;
+    bottom: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    overflow: hidden;
 }
 
 #zoomedImage {
@@ -333,6 +350,9 @@ color: #333333;
     max-height: 30vh;
 }
 
+#enlargedImage{
+max-height: 60vh;
+}
 
 #productVideo>h1 {
     font-size: 1.0rem;
