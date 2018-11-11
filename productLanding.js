@@ -1,10 +1,4 @@
 
-
-//fix mobile layout for onmouseover zooming --disable
-
-//image flipping on hover
-
-
 //header scrolling
 const headerElement = document.getElementById("header");
 
@@ -22,8 +16,12 @@ textLinkClickHandler(document.getElementsByClassName("nav-link"));
 textLinkClickHandler(document.getElementsByClassName("welcomeLink"));
 
 //console.log(window.screen.availWidth);
-
 flipBoxRotation();
+//need to re-run for size changes 
+window.onresize = () => {
+console.log("resize");
+    flipBoxRotation();
+}
 addImageEnhancements();
 
 // window.onresize = () => {
@@ -41,11 +39,30 @@ function flipBoxRotation() {
 
     [...document.getElementsByClassName("flipBox")].forEach(flipBox => {
 
-        const innerFlipBox = getChildByClassFromParent(flipBox, "flipBoxInner");
+        // const innerFlipBox = getChildByClassFromParent(flipBox, "flipBoxInner");
+        const innerFlipBox = flipBox.getElementsByClassName("flipBoxInner")[0];
+        const thisDescriptionBlock = getParentByClassFromChild(flipBox, "descriptionBlock");
+
+
         //image will flip on click for mobile
         if (window.screen.availWidth < 600) {
+
+            //remove image hover functionality 
+            // if (flipBox.hasAttribute(onmouseover)) {
+                console.log("here123");
+                flipBox.onmouseover = null;
+                flipBox.onmouseout = null;
+                innerFlipBox.style.transform = null;
+            // }
+
+            const rotateIcon = document.createElement('img');
+
+            rotateIcon.classList.add("rotateIcon");
+            rotateIcon.src = "rotating-circular-arrow.png";
+            thisDescriptionBlock.insertBefore(rotateIcon, thisDescriptionBlock.getElementsByTagName("p")[0]);
+
             let counter = 0;
-            flipBox.onclick = (event) => {
+            rotateIcon.onclick = (event) => {
                 counter++;
 
                 if (innerFlipBox != null) {
@@ -57,6 +74,12 @@ function flipBoxRotation() {
                 }
             }
         } else {
+            //remove rotate icon for large screens
+            if ([...thisDescriptionBlock.children].some(element => element.classList.contains("rotateIcon"))) {
+                thisDescriptionBlock.removeChild(thisDescriptionBlock.getElementsByClassName("rotateIcon")[0]);
+            }
+
+
             //image will flip on hover for full screen
             flipBox.onmouseover = (event) => {
                 innerFlipBox.style.transform = "rotateY(180deg)";
@@ -70,19 +93,19 @@ function flipBoxRotation() {
 }
 
 //may not need
-// function getParentByClassFromChild(child, className) {
+function getParentByClassFromChild(child, className) {
 
-//     let parent = child;
-//     while (parent != null && parent.classList.length > 0) {
+    let parent = child;
+    while (parent != null && parent.classList.length > 0) {
 
-//         if (parent.classList.contains(className)) {
-//             return parent;
-//         } else {
-//             parent = parent.parentNode;
-//         }
-//     }
-//     return null;
-// }
+        if (parent.classList.contains(className)) {
+            return parent;
+        } else {
+            parent = parent.parentNode;
+        }
+    }
+    return null;
+}
 
 function getChildByClassFromParent(parent, className) {
 
@@ -94,28 +117,9 @@ function getChildByClassFromParent(parent, className) {
             }
         }
         child = child.firstElementChild;
-
     }
     return null;
 }
-
-// function getOppositeFlipSurface(flipSurface) {
-//     let thisSide, oppositeSide;
-//     if (flipSurface.classList.contains("flipBoxFront")) {
-//         thisSide = "front";
-//         oppositeSide = "back";
-//     } else if (flipSurface.classList.contains("flipBoxBack")) {
-//         thisSide = "back";
-//         oppositeSide = "front";
-//     }
-
-
-//     const parent = flipSurface.parent;
-
-//     return [...parent.children].find(element => element.classList.includes(oppositeSide));
-
-// }
-
 
 
 function addImageEnhancements() {
@@ -169,26 +173,8 @@ function createImageZooming(image, temporaryContainerDiv) {
             deleteChildNodes(document.getElementById("temporaryImageContainer"));
             document.getElementById("productDescription").removeChild(temporaryContainerDiv);
         }
-
-        //    if ( zoomedImage.style.opacity = "0") {
-        //         console.log("else click");
-        //         temporaryContainerDiv.removeChild(image2);
-        //         temporaryContainerDiv.removeChild(zoomedImage);
-        //         document.getElementById("productDescription").removeChild(temporaryContainerDiv);
-        //     }
     }
 }
-
-// function removeElementsFromDOM(arrayOfElements) {
-
-//     arrayOfElements.forEach(element => {
-
-//         const parent = element.parentNode;
-//         parent.removeChild(element);
-
-//     });
-// }
-
 
 function deleteChildNodes(element) {
 
@@ -202,7 +188,6 @@ function deleteChildNodes(element) {
 
     });
 }
-
 
 function addZoomer(element) {
 
@@ -270,7 +255,6 @@ function onPlayerReady(event) {
     event.target.mute();
 }
 
-
 //scroll link code
 function textLinkClickHandler(textLinkHTMLcollection) {
     [...textLinkHTMLcollection].forEach(link => {
@@ -288,6 +272,3 @@ function onClickHandler(event) {
 
     document.getElementById("product" + targetString).scrollIntoView({ block: "start", behavior: "smooth" });
 }
-
-
-

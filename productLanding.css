@@ -133,11 +133,16 @@ body{
 
 .descriptionBlock>p{
     font-weight: bold;
+    margin-bottom: 0px;
 }
 
 .descriptionBlock>ul{
     list-style-type: none;
     padding: 0px;
+}
+
+.descriptionBlock li{
+    font-size: 0.9rem;
 }
 
 .flipBox{
@@ -166,6 +171,11 @@ body{
     backface-visibility: hidden;
 }
 
+.rotateIcon{
+    max-height: 4vh;
+    max-width: 10vw;
+    align-self: center;
+}
 
 .surfaceImage{
     max-height: 35vh;
@@ -194,7 +204,6 @@ body{
 }
 
 #enlargedImage{
-
     max-height: 80vh;
 }
 
@@ -302,6 +311,9 @@ color: #333333;
     font-size: 1.1rem;
 }
 
+footer{
+    font-size: 0.5rem;
+}
 
 @media screen and (max-width: 600px) {
 
@@ -346,6 +358,9 @@ color: #333333;
 
 }
 
+.flipBox{
+    min-height: 32vh;
+}
 .surfaceImage{
     max-height: 30vh;
 }
