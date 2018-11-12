@@ -18,22 +18,23 @@ textLinkClickHandler(document.getElementsByClassName("welcomeLink"));
 //console.log(window.screen.availWidth);
 flipBoxRotation();
 //need to re-run for size changes 
+let testTimeOut;
+
 window.onresize = () => {
-console.log("resize");
-    flipBoxRotation();
+
+    window.clearTimeout(testTimeOut);    
+    testTimeOut = window.setTimeout(()=>{
+        console.log("resize");
+        flipBoxRotation();
+
+    }, 800);
+
+
+
+    // console.log("resize");
+    // flipBoxRotation();
 }
 addImageEnhancements();
-
-// window.onresize = () => {
-//     if (window.screen.availWidth < 600) {
-//         flipBoxRotation();
-//     } else {
-
-
-
-//     }
-// }
-
 
 function flipBoxRotation() {
 
@@ -42,34 +43,35 @@ function flipBoxRotation() {
         // const innerFlipBox = getChildByClassFromParent(flipBox, "flipBoxInner");
         const innerFlipBox = flipBox.getElementsByClassName("flipBoxInner")[0];
         const thisDescriptionBlock = getParentByClassFromChild(flipBox, "descriptionBlock");
-
+        console.log(thisDescriptionBlock);
 
         //image will flip on click for mobile
         if (window.screen.availWidth < 600) {
 
             //remove image hover functionality 
-            // if (flipBox.hasAttribute(onmouseover)) {
-                console.log("here123");
-                flipBox.onmouseover = null;
-                flipBox.onmouseout = null;
-                innerFlipBox.style.transform = null;
-            // }
+            flipBox.onmouseover = null;
+            flipBox.onmouseout = null;
+            innerFlipBox.style.transform = null;
 
-            const rotateIcon = document.createElement('img');
 
-            rotateIcon.classList.add("rotateIcon");
-            rotateIcon.src = "rotating-circular-arrow.png";
-            thisDescriptionBlock.insertBefore(rotateIcon, thisDescriptionBlock.getElementsByTagName("p")[0]);
 
-            let counter = 0;
-            rotateIcon.onclick = (event) => {
-                counter++;
+            if (!thisDescriptionBlock.classList.contains("rotateIcon")) {
+                const rotateIcon = document.createElement('img');
+                console.log("icon not found");
+                rotateIcon.classList.add("rotateIcon");
+                rotateIcon.src = "rotating-circular-arrow.png";
+                thisDescriptionBlock.insertBefore(rotateIcon, thisDescriptionBlock.getElementsByTagName("p")[0]);
 
-                if (innerFlipBox != null) {
-                    if (counter % 2 != 0) {
-                        innerFlipBox.style.transform = "rotateY(180deg)";
-                    } else {
-                        innerFlipBox.style.transform = "rotateY(0deg)";
+                let counter = 0;
+                rotateIcon.onclick = (event) => {
+                    counter++;
+
+                    if (innerFlipBox != null) {
+                        if (counter % 2 != 0) {
+                            innerFlipBox.style.transform = "rotateY(180deg)";
+                        } else {
+                            innerFlipBox.style.transform = "rotateY(0deg)";
+                        }
                     }
                 }
             }
@@ -78,7 +80,6 @@ function flipBoxRotation() {
             if ([...thisDescriptionBlock.children].some(element => element.classList.contains("rotateIcon"))) {
                 thisDescriptionBlock.removeChild(thisDescriptionBlock.getElementsByClassName("rotateIcon")[0]);
             }
-
 
             //image will flip on hover for full screen
             flipBox.onmouseover = (event) => {
@@ -107,19 +108,19 @@ function getParentByClassFromChild(child, className) {
     return null;
 }
 
-function getChildByClassFromParent(parent, className) {
+// function getChildByClassFromParent(parent, className) {
 
-    let child = parent;
-    while (child != null) {
-        if (child.classList.length > 0) {
-            if (child.classList.contains(className)) {
-                return child;
-            }
-        }
-        child = child.firstElementChild;
-    }
-    return null;
-}
+//     let child = parent;
+//     while (child != null) {
+//         if (child.classList.length > 0) {
+//             if (child.classList.contains(className)) {
+//                 return child;
+//             }
+//         }
+//         child = child.firstElementChild;
+//     }
+//     return null;
+// }
 
 
 function addImageEnhancements() {
@@ -185,7 +186,6 @@ function deleteChildNodes(element) {
         } else {
             element.removeChild(child);
         }
-
     });
 }
 
