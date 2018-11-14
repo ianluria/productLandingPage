@@ -22,17 +22,7 @@ let testTimeOut;
 
 window.onresize = () => {
 
-    window.clearTimeout(testTimeOut);    
-    testTimeOut = window.setTimeout(()=>{
-        console.log("resize");
-        flipBoxRotation();
-
-    }, 800);
-
-
-
-    // console.log("resize");
-    // flipBoxRotation();
+    flipBoxRotation();
 }
 addImageEnhancements();
 
@@ -43,7 +33,6 @@ function flipBoxRotation() {
         // const innerFlipBox = getChildByClassFromParent(flipBox, "flipBoxInner");
         const innerFlipBox = flipBox.getElementsByClassName("flipBoxInner")[0];
         const thisDescriptionBlock = getParentByClassFromChild(flipBox, "descriptionBlock");
-        console.log(thisDescriptionBlock);
 
         //image will flip on click for mobile
         if (window.screen.availWidth < 600) {
@@ -54,10 +43,8 @@ function flipBoxRotation() {
             innerFlipBox.style.transform = null;
 
 
-
-            if (!thisDescriptionBlock.classList.contains("rotateIcon")) {
+            if ([...thisDescriptionBlock.children].some(element => element.classList.contains("rotateIcon")) === false) {
                 const rotateIcon = document.createElement('img');
-                console.log("icon not found");
                 rotateIcon.classList.add("rotateIcon");
                 rotateIcon.src = "rotating-circular-arrow.png";
                 thisDescriptionBlock.insertBefore(rotateIcon, thisDescriptionBlock.getElementsByTagName("p")[0]);
@@ -125,7 +112,7 @@ function getParentByClassFromChild(child, className) {
 
 function addImageEnhancements() {
 
-    [...document.getElementsByClassName("rearFlipImage")].forEach(rearImage => rearImage.onclick = enlargeImageOnClick);
+    [...document.getElementsByClassName("surfaceImage")].forEach(rearImage => rearImage.onclick = enlargeImageOnClick);
 }
 
 function enlargeImageOnClick(event) {
@@ -142,7 +129,7 @@ function enlargeImageOnClick(event) {
 function createImageZooming(image, temporaryContainerDiv) {
 
     const image2 = image.cloneNode();
-    image2.classList.remove("surfaceImage", "rearFlipImage");
+    image2.classList.remove("surfaceImage");
     image2.id = "enlargedImage";
     temporaryContainerDiv.appendChild(image2);
 
