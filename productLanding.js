@@ -18,17 +18,9 @@ textLinkClickHandler(document.getElementsByClassName('welcomeLink'));
 // console.log(window.screen.availWidth);
 flipBoxRotation();
 // need to re-run for size changes
-let testTimeOut;
 
 window.onresize = () => {
-  window.clearTimeout(testTimeOut);
-  testTimeOut = window.setTimeout(() => {
-    console.log('resize');
-    flipBoxRotation();
-  }, 800);
-
-  // console.log("resize");
-  // flipBoxRotation();
+  flipBoxRotation();
 };
 addImageEnhancements();
 
@@ -37,7 +29,6 @@ function flipBoxRotation() {
     // const innerFlipBox = getChildByClassFromParent(flipBox, "flipBoxInner");
     const innerFlipBox = flipBox.getElementsByClassName('flipBoxInner')[0];
     const thisDescriptionBlock = getParentByClassFromChild(flipBox, 'descriptionBlock');
-    console.log(thisDescriptionBlock);
 
     // image will flip on click for mobile
     if (window.screen.availWidth < 600) {
@@ -47,7 +38,7 @@ function flipBoxRotation() {
       innerFlipBox.style.transform = null;
 
 
-      if (!thisDescriptionBlock.classList.contains('rotateIcon')) {
+      if ([...thisDescriptionBlock.children].some(element => element.classList.contains('rotateIcon')) === false) {
         const rotateIcon = document.createElement('img');
         rotateIcon.classList.add('rotateIcon');
         rotateIcon.src = 'rotating-circular-arrow.png';
@@ -112,7 +103,7 @@ function getParentByClassFromChild(child, className) {
 
 
 function addImageEnhancements() {
-  [...document.getElementsByClassName('surfaceImage')].forEach(image => (image.onclick = enlargeImageOnClick));
+  [...document.getElementsByClassName('surfaceImage')].forEach(image => image.onclick = enlargeImageOnClick);
 }
 
 function enlargeImageOnClick(event) {
@@ -180,7 +171,7 @@ function addZoomer(element) {
     const magnified = document.getElementById('zoomedImage');
 
 
-    const magnifiedStyle = magnified.style;
+    const zoomedStyle = magnified.style;
 
 
     const imgWidth = original.width;
@@ -210,11 +201,11 @@ function addZoomer(element) {
 
     // console.log("x", x, "y", y, "xperc", xperc, "yperc", yperc);
 
-    magnifiedStyle.backgroundPositionX = `${xperc - 9}%`;
-    magnifiedStyle.backgroundPositionY = `${yperc - 9}%`;
+    zoomedStyle.backgroundPositionX = `${xperc - 9}%`;
+    zoomedStyle.backgroundPositionY = `${yperc - 9}%`;
 
-    magnifiedStyle.left = `${event.clientX - 180}px`;
-    magnifiedStyle.top = `${event.clientY - 180}px`;
+    zoomedStyle.left = `${event.clientX - 180}px`;
+    zoomedStyle.top = `${event.clientY - 180}px`;
   });
 }
 
