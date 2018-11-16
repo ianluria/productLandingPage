@@ -1,32 +1,49 @@
 
-// header scrolling
-const headerElement = document.getElementById('header');
-
-const headerInitialTop = headerElement.offsetTop;
-document.body.onscroll = () => {
-  if (window.scrollY >= headerInitialTop) {
-    headerElement.style.position = 'fixed';
-  } else {
-    headerElement.style.position = 'static';
-  }
-};
+document.body.onscroll = stickyHeaderBar;
 
 textLinkClickHandler(document.getElementsByClassName('nav-link'));
-
 textLinkClickHandler(document.getElementsByClassName('welcomeLink'));
 
-// console.log(window.screen.availWidth);
 flipBoxRotation();
-// need to re-run for size changes
 
 window.onresize = () => {
   flipBoxRotation();
 };
+
 addImageEnhancements();
+
+function stickyHeaderBar() {
+  const headerElement = document.getElementById('header');
+  const headerWrapper = document.getElementById("headerWrapper");
+
+  if (window.scrollY >= headerWrapper.offsetTop) {
+    headerElement.style.position = 'fixed';
+  } else if (window.scrollY < headerWrapper.offsetTop) {
+    headerElement.style.position = 'static';
+  }
+}
+
+function textLinkClickHandler(textLinkHTMLcollection) {
+  [...textLinkHTMLcollection].forEach((link) => {
+    link.onclick = onClickHandler;
+  });
+}
+
+function onClickHandler(event) {
+  const regEx = new RegExp(/[a-z]+/);
+
+  //Class name in the 1 index must be in the following format to allow targeting of internal link
+  //lower case letters equalling "description", "video", or "request"
+  //followed by "Link"
+  let targetString = regEx.exec(event.target.classList[1])[0];
+
+  targetString = targetString.slice(0, 1).toUpperCase() + targetString.slice(1);
+
+  document.getElementById(`product${targetString}`).scrollIntoView({ block: 'start', behavior: 'smooth' });
+}
 
 function flipBoxRotation() {
   [...document.getElementsByClassName('flipBox')].forEach((flipBox) => {
-    // const innerFlipBox = getChildByClassFromParent(flipBox, "flipBoxInner");
     const innerFlipBox = flipBox.getElementsByClassName('flipBoxInner')[0];
     const thisDescriptionBlock = getParentByClassFromChild(flipBox, 'descriptionBlock');
 
@@ -36,7 +53,6 @@ function flipBoxRotation() {
       flipBox.onmouseover = null;
       flipBox.onmouseout = null;
       innerFlipBox.style.transform = null;
-
 
       if ([...thisDescriptionBlock.children].some(element => element.classList.contains('rotateIcon')) === false) {
         const rotateIcon = document.createElement('img');
@@ -75,9 +91,8 @@ function flipBoxRotation() {
   });
 }
 
-// may not need
 function getParentByClassFromChild(child, className) {
-  let parent = child;
+  let parent = child.parentNode;
   while (parent != null && parent.classList.length > 0) {
     if (parent.classList.contains(className)) {
       return parent;
@@ -86,21 +101,6 @@ function getParentByClassFromChild(child, className) {
   }
   return null;
 }
-
-// function getChildByClassFromParent(parent, className) {
-
-//     let child = parent;
-//     while (child != null) {
-//         if (child.classList.length > 0) {
-//             if (child.classList.contains(className)) {
-//                 return child;
-//             }
-//         }
-//         child = child.firstElementChild;
-//     }
-//     return null;
-// }
-
 
 function addImageEnhancements() {
   [...document.getElementsByClassName('surfaceImage')].forEach(image => image.onclick = enlargeImageOnClick);
@@ -153,42 +153,20 @@ function createImageZooming(image, temporaryContainerDiv) {
   };
 }
 
-function deleteChildNodes(element) {
-  [...element.children].forEach((child) => {
-    if (child.hasChildNodes()) {
-      deleteChildNodes(child);
-    } else {
-      element.removeChild(child);
-    }
-  });
-}
-
 function addZoomer(element) {
   element.addEventListener('mousemove', (event) => {
     const original = document.getElementById('enlargedImage');
-
-
     const magnified = document.getElementById('zoomedImage');
-
-
     const zoomedStyle = magnified.style;
-
-
     const imgWidth = original.width;
-
-
     const imgHeight = original.height;
 
     magnified.style.opacity = 1;
 
     const x = event.offsetX - ((event.target.clientWidth - imgWidth) / 2);
-
-
     const y = event.offsetY - ((event.target.clientHeight - imgHeight) / 2);
 
     let xperc = ((x / imgWidth) * 100);
-
-
     let yperc = ((y / imgHeight) * 100);
 
     if (x >= (0.01 * imgWidth)) {
@@ -199,8 +177,6 @@ function addZoomer(element) {
       yperc += (0.15 * yperc); // .15
     }// lets user scroll past bottom edge of image
 
-    // console.log("x", x, "y", y, "xperc", xperc, "yperc", yperc);
-
     zoomedStyle.backgroundPositionX = `${xperc - 9}%`;
     zoomedStyle.backgroundPositionY = `${yperc - 9}%`;
 
@@ -209,7 +185,17 @@ function addZoomer(element) {
   });
 }
 
-// youtube code
+function deleteChildNodes(element) {
+  [...element.children].forEach((child) => {
+    if (child.hasChildNodes()) {
+      deleteChildNodes(child);
+    } else {
+      element.removeChild(child);
+    }
+  });
+}
+
+// YouTube code
 const tag = document.createElement('script');
 
 tag.src = 'https://www.youtube.com/iframe_api';
@@ -237,21 +223,4 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
   event.target.mute();
-}
-
-// scroll link code
-function textLinkClickHandler(textLinkHTMLcollection) {
-  [...textLinkHTMLcollection].forEach((link) => {
-    link.onclick = onClickHandler;
-  });
-}
-
-function onClickHandler(event) {
-  const regEx = new RegExp(/[a-z]+/);
-
-  let targetString = regEx.exec(event.target.classList[1])[0];
-
-  targetString = targetString.slice(0, 1).toUpperCase() + targetString.slice(1);
-
-  document.getElementById(`product${targetString}`).scrollIntoView({ block: 'start', behavior: 'smooth' });
 }

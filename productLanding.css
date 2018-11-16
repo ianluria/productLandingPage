@@ -32,6 +32,7 @@ body{
 }
 
 #header{
+    position: static;
     min-width: 100vw;
     min-height: 7vh;
     top: 0; 
@@ -110,7 +111,6 @@ body{
    justify-content:center;
    align-items: center; 
    position: relative;
-   /* padding: 0vh 2vw; */
 }
 
 #productDescription>h1{
@@ -160,10 +160,6 @@ body{
     transform-style: preserve-3d;
 }
 
-/* .flipBox:hover .flipBoxInner {
-    transform: rotateY(180deg);
-} */
-
 .flipBoxFront, .flipBoxBack {
     position: absolute;
     width: 100%;
@@ -188,7 +184,6 @@ body{
 
 #temporaryImageContainer{
     position: absolute;
-    /* left:-999em; */
     left:0em;
     overflow: scroll;
     background-color: hsla(0, 0%, 100%, 1);
@@ -210,24 +205,17 @@ body{
 #closingX{
     width: 20px;
     height: 20px;
-    /* border-radius: 100%;
-    border: black solid 2px; */
     font-size: 3rem;
     position: absolute;
     left: 85%;
     bottom: 90%;
     z-index: 101;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
     font-weight: bold;
-    /* overflow: hidden; */
 }
 
 #zoomedImage {
     width: 340px;
     height: 340px;
-    /* background: url(saltRear.png) no-repeat #FFF; */
     box-shadow: 0 5px 10px -2px rgba(0,0,0,0.3);
     pointer-events: none;
     position: absolute;
@@ -249,9 +237,9 @@ body{
     /* padding: 5vh 10vw; */
 }
 
-#productVideo>h1{
+/* #productVideo>h1{
     font-size: 2em;
-}
+} */
 
 #productVideo>p{
 font-size: 1.0em;
@@ -341,13 +329,13 @@ footer{
 }
 
 .nav-link:hover{
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     text-decoration: underline;
 }
 
-#productDescription>h1{
+/* #productDescription>h1{
     font-size: 1.1rem;
-}
+} */
 
 #descriptionContainer{
     width: 90vw;
@@ -370,9 +358,14 @@ footer{
 max-height: 60vh;
 }
 
-#productVideo>h1 {
-    font-size: 1.0rem;
+h1 {
+    font-size: 1.1rem;
+    text-align: center;
+    max-width: 90%;
 }
+/* #productVideo>h1 {
+    font-size: 1.0rem;
+} */
 
 #productVideo>p{
     font-size: 0.78rem;
@@ -393,9 +386,9 @@ max-height: 60vh;
     max-height: 30vh;
 }
 
-#productRequest>h1{
+/* #productRequest>h1{
     font-size: 1.12rem;
-}
+} */
 
 .regularFontSize, li {
     font-size: .9rem;
