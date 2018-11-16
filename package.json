@@ -1,0 +1,21 @@
+{
+  "name": "productlanding",
+  "version": "1.0.0",
+  "description": "Producting Landing Page for Ogden Salt ",
+  "main": "productLanding.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "producting",
+    "landing",
+    "page"
+  ],
+  "author": "Ian Luria",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}

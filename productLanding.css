@@ -39,7 +39,7 @@ body{
     justify-content: space-around;
     align-items: center;
     background: #f2f2f2;  
-    z-index: 100;
+    z-index: 110;
 }
 
 .nav-link{
@@ -210,17 +210,18 @@ body{
 #closingX{
     width: 20px;
     height: 20px;
-    border-radius: 100%;
-    border: black solid 2px;
-    font-size: 1rem;
+    /* border-radius: 100%;
+    border: black solid 2px; */
+    font-size: 3rem;
     position: absolute;
-    left: 90%;
+    left: 85%;
     bottom: 90%;
-    display: flex;
+    z-index: 101;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     font-weight: bold;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 #zoomedImage {
