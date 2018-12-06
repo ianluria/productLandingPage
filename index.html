@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title Will Go Here</title>
+    <link rel="stylesheet" type="text/css" href="productLanding.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+</head>
+
+<body>
+    <div id="productWelcome" class="panel">
+        <img src="osclargelogo.png" alt="Our Logo" id="welcomeLogo">
+        <p id="welcomeText" class="regularFontSize">Since 1921, purveyors of pure, fine grain, salt sourced from
+            the Great Salt
+            Lake.</p>
+        <div id="welcomeLinks">
+            <span class="welcomeLink descriptionLink regularFontSize">Products</span>
+            <span class="welcomeLink videoLink regularFontSize">Video</span>
+            <span class="welcomeLink requestLink regularFontSize">Request Information</span>
+        </div>
+    </div>
+    <div id="headerWrapper">
+        <header id="header">
+            <span class="nav-link descriptionLink regularFontSize">Description</span>
+            <span class="nav-link videoLink regularFontSize">Video</span>
+            <span class="nav-link requestLink regularFontSize">Request</span>
+        </header>
+    </div>
+    <div id="productDescription" class="panel">
+        <div id="descriptionWrapper">
+            <h1>Ogden Salt Co. Offers Two Product Lines</h1>
+            <div id="descriptionContainer">
+                <span id="descriptionBlock1" class="descriptionBlock">
+                    <div class="flipBox">
+                        <div class="flipBoxInner">
+                            <div class="flipBoxFront">
+                                <img src="saltFront.png" alt="Clorox Pool Salt Bag Front" id="cloroxFront" class="surfaceImage">
+                            </div>
+                            <div class="flipBoxBack">
+                                <img src="saltRear.png" alt="Clorox Pool Salt Back" class="surfaceImage" id="cloroxBack">
+                            </div>
+                        </div>
+                    </div>
+                    <p class="regularFontSize">Clorox&reg; Pool Salt</p>
+                    <ul>
+                        <li>Pure Sodium Chloride</li>
+                        <li>Ultra Fine Granules</li>
+                        <li>Clorox&reg; Brand Quality Standards</li>
+                    </ul>
+                </span>
+                <span id="descriptionBlock2" class="descriptionBlock">
+                    <div class="flipBox">
+                        <div class="flipBoxInner">
+                            <div class="flipBoxFront">
+                                <img src="bagSalt.png" alt="Large Generic Bag of Salt" id="genericSaltBag" class="surfaceImage">
+                            </div>
+                            <div class="flipBoxBack">
+                                <img src="bagSalt.png" alt="Large Generic Bag of Salt" id="genericSaltBag" class="surfaceImage rearFlipImage">
+                            </div>
+                        </div>
+                    </div>
+                    <p class="regularFontSize">Bulk Industrial Fine Salt</p>
+                    <ul>
+                        <li>Pure Sodium Chloride</li>
+                        <li>Fine Granules</li>
+                        <li>ISO 9001</li>
+                    </ul>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div id="productVideo" class="panel">
+
+        <h1>The Great Salt Lake's North Arm is our source.</h1>
+        <p class="regularFontSize">At approximately seven times more salty than the ocean, our source is abundant and
+            easy to harvest.
+            Since 1919, we are the experts in Utah's desaliniztion.</p>
+        <div id="videoWrapper">
+            <div id="youTubePlayer"></div>
+        </div>
+
+    </div>
+    <div id="productRequest" class="panel">
+        <h1>Request More Information</h1>
+
+        <form id="form" action="https://www.freecodecamp.com/email-submit" method="post">
+            <label for="commentsInput" class="regularFontSize">Optional Questions and Comments</label>
+            <br>
+            <textarea name="comments" id="commentsInput" rows="5" cols="50" placeholder="Optional" class="userInput regularFontSize"></textarea>
+            <br>
+            <label for="emailInput" class="regularFontSize">Email Address</label>
+            <br>
+            <input type="email" name="email" id="emailInput" class="userInput regularFontSize" required>
+            <br>
+            <input type="submit" value="Submit" class="regularFontSize">
+        </form>
+    </div>
+    <footer>
+        <p>Rotate Icon made by Freepik from www.flaticon.com </p>
+    </footer>
+</body>
+
+<script src="productLanding.js"></script>
+
+</html>
