@@ -13,13 +13,13 @@ window.onresize = () => {
 addImageEnhancements();
 
 function stickyHeaderBar() {
-  const headerElement = document.getElementById('header');
-  const headerWrapper = document.getElementById("headerWrapper");
+  const header = document.getElementById('header');
+  const navBar = document.getElementById("nav-bar");
 
-  if (window.scrollY >= headerWrapper.offsetTop) {
-    headerElement.style.position = 'fixed';
-  } else if (window.scrollY < headerWrapper.offsetTop) {
-    headerElement.style.position = 'static';
+  if (window.scrollY >= header.offsetTop) {
+    navBar.style.position = 'fixed';
+  } else if (window.scrollY < header.offsetTop) {
+    navBar.style.position = 'static';
   }
 }
 

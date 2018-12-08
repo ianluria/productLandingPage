@@ -23,13 +23,13 @@ body {
   min-height: 100vh;
 }
 
-#headerWrapper {
+#header {
   min-width: 100vw;
   min-height: 7vh;
   background-color: transparent;
 }
 
-#header {
+#nav-bar {
   position: static;
   min-width: 100vw;
   min-height: 7vh;
