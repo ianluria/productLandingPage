@@ -235,7 +235,7 @@ body {
   color: #333;
 }
 
-#videoWrapper {
+#video {
   min-height: 55vh;
   max-height: 55vh;
   min-width: 100vw;
@@ -340,7 +340,7 @@ footer {
     text-align: justify;
   }
 
-  #videoWrapper {
+  #video {
     min-height: 35vh;
     max-height: 35vh;
     min-width: 90vw;
